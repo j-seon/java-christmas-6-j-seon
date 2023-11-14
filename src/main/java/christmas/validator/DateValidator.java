@@ -1,15 +1,16 @@
 package christmas.validator;
 
-import static christmas.enums.ErrorMessage.NOT_VALID_DATE;
+
+import static christmas.enums.ErrorMessage.NOT_VALID_DATE_ERROR;
 
 public class DateValidator {
     public boolean isValidDate(String input) {
         try {
             if(!isNumber(input)) {
-                throw new IllegalArgumentException(NOT_VALID_DATE.getMessage());
+                throw new IllegalArgumentException(NOT_VALID_DATE_ERROR.getMessage());
             }
             if(!isDate(Integer.parseInt(input))) {
-                throw new IllegalArgumentException(NOT_VALID_DATE.getMessage());
+                throw new IllegalArgumentException(NOT_VALID_DATE_ERROR.getMessage());
             }
             return true;
         } catch (Exception e) {
@@ -18,8 +19,8 @@ public class DateValidator {
         }
     }
 
-    private boolean isNumber(String inputStr) {
-        return inputStr != null && inputStr.matches("[0-9]+");
+    private boolean isNumber(String input) {
+        return input.matches("[0-9]+");
     }
     private boolean isDate(int date) {
         final int MIN_DATE = 1;

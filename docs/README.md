@@ -3,19 +3,19 @@
 >해당 파트의 오류들은 **IllegalArgumentException을 호출**합니다.
 
 🛑 **입력받기 공통 예외처리**
-- [ ] **isEmptyRegistry** : 입력 값이 비어있을 경우 `[ERROR] 응답이 존재하지 않습니다. 질문에 맞는 대답을 입력해주세요.`
-- [ ] **hasSpace** : 입력 값에 공백이 있을 경우 `"[ERROR] 글자에 공백이 포함되지 않도록 다시 입력해주세요.`
+- [x] **isEmptyRegistry** : 입력 값이 비어있을 경우 `[ERROR] 응답이 존재하지 않습니다. 질문에 맞는 대답을 입력해주세요.`
+- [x] **hasSpace** : 입력 값에 공백이 있을 경우 `"[ERROR] 글자에 공백이 포함되지 않도록 다시 입력해주세요.`
 
 
 ## 식당 날짜 입력 받기
 
 **✨기능**
 - 날짜 받아오기 (InputView)
-  - [ ] **getScheduleDate** : 사용자의 입력값을 받아와 식당 날짜를 return
+  - [x] **readDate** : 사용자의 입력값을 받아와 식당 날짜를 return
 
 🛑 **예외처리**
 - 예외처리 (DateValidator)
-  - [ ] **isInvalidDate** : 1~31 사이의 숫자라면 true, 아닐 경우 `[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.`
+  - [x] **isInvalidDate** : 1~31 사이의 숫자라면 true, 아닐 경우 `[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.`
 
 
 
@@ -26,27 +26,23 @@
 **✨기능**
 
 - 매뉴 받아오기 (InputView)
-  - [ ] **getMenuOrders** : 사용자의 입력값을 받아와 로 저장
+  - [x] **readOrder** : 사용자의 입력값을 받아와 메뉴 리스트를 return
 
 - 메뉴 저장 (OrderService)
-  - [ ] **splitMenuListByComma** : "," 를 구분으로 메뉴 목록을 저장.
-  - [ ] **extractMenuNameAndQuantity** : 메뉴 목록에서 "-" 를 구분으로 메뉴명과 개수를 구분 -> MenuOrder 클래스에 저장
-  - [ ] **assignMenuCategoryToOrder**: 메뉴목록에서 메뉴 이름으로 카테고리 확인 -> MenuOrder클래스에 저장
-
-
-- 메뉴 가격, 개수 계산 (OrderCalculate)
-  - [ ] **calculateTotalOrderAmount** : 주문한 메뉴의 가격을 가져와 총 주문금액을 계산
-  - [ ] **calculateTotalMenuQuantity** : 주문한 메뉴의 총 개수를 계산
+  - [x] **splitMenuListByComma** : "," 를 구분으로 메뉴 목록을 저장.
+  - [x] **extractMenuNameAndQuantity** : 메뉴 목록에서 "-" 를 구분으로 메뉴명과 개수를 구분 -> MenuOrder 클래스에 저장
+  - [x] 총 주문금액을 계산
+  - [x] 주문한 메뉴의 총 개수를 계산
 
 **🛑예외처리**
 - 예외처리 (OrderValidator)
-  - [ ] **checkMenuExistence** : 고객이 메뉴판에 없는 메뉴를 입력 할 경우 `[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.`
-  - [ ] **validateMenuFormat** : 메뉴판의 작성 양식(메뉴-주문개수)이 틀린 경우 `[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.`
-  - [ ] **checkMaxOrderLimit** : 총 주문한 메뉴의 개수가 20개 이상일 경우 `[ERROR] 한 주문당 최대 주문 가능 메뉴 수는 20개 입니다. 다시 입력해 주세요.`
-  - [ ] **validateOrderQuantity** : 한 메뉴의 주문 개수가 1개 미만일 경우 `[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.`
-  - [ ] **checkDuplicateMenu** : 중복된 메뉴를 입력할 경우 `[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.`
-  - [ ] **checkBeverageOnlyOrder** : 음료만 주문할 경우 `[ERROR] 음료만 주문하는 것은은 불가능 합니다. 다른 메뉴도 포함해 다시 입력해 주세요.`
-  - [ ] **checkMinimumOrderAmount** : 총합 주문 금액의 합이 10,000원 미만일 경우 `[ERROR] 최소 주문 금액은 10,000원 입니다. 다시 입력해 주세요.`
+  - [x] **isNotMatchMenuFormat** : 구매 개수에 숫자가 아닌 다른 값을 입력한 경우 `[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.`
+    - [x] **isMenuExistence** : 고객이 메뉴판에 없는 메뉴를 입력 할 경우 `[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.`
+  - [x] **isOverMaxOrderLimit** : 총 주문한 메뉴의 개수가 20개 이상일 경우 `[ERROR] 한 주문당 최대 주문 가능 메뉴 수는 20개 입니다. 다시 입력해 주세요.`
+  - [x] **isOverMinOrderLimit** : 한 메뉴의 주문 개수가 1개 미만일 경우 `[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.`
+  - [x] **isDuplicateMenu** : 중복된 메뉴를 입력할 경우 `[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.`
+  - [x] **isBeverageOnlyOrder** : 음료만 주문할 경우 `[ERROR] 음료만 주문하는 것은은 불가능 합니다. 다른 메뉴도 포함해 다시 입력해 주세요.`
+  - [x] **isOverMinOrderAmount** : 총합 주문 금액의 합이 10,000원 미만일 경우 `[ERROR] 최소 주문 금액은 10,000원 입니다. 다시 입력해 주세요.`
 
 
 ## 주문 명세서 출력하기
