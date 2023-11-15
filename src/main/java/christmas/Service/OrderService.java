@@ -34,6 +34,21 @@ public class OrderService {
         }
         return order;
     }
+
+    public String getEventBadgeStatus(Order order) {
+        int totalDiscount = order.getTotalDiscountAmount();
+        if(totalDiscount > 5000) {
+            return "별";
+        }
+        if(totalDiscount > 10000) {
+            return "트리";
+        }
+        if(totalDiscount > 20000) {
+            return "산타";
+        }
+        return "없음";
+    }
+
     public List<String> splitMenuListByComma(String input) {
         List<String> menu = new ArrayList();
         menu.addAll(List.of(input.split(",")));
@@ -54,4 +69,5 @@ public class OrderService {
         order.addMenuOrder(menuOrder);
         return order;
     }
+
 }

@@ -7,8 +7,7 @@ public enum ErrorMessage {
     INVALID_ORDER_ERROR("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."),
     OVER_MAX_ORDER_LIMIT_ERROR("[ERROR] 한 주문당 최대 주문 가능 메뉴 수는 20개 입니다. 다시 입력해 주세요."),
     BEVERAGE_ONLY_ORDER_ERROR("[ERROR] 음료만 주문하는 것은 불가능 합니다. 다른 메뉴도 포함해 다시 입력해 주세요."),
-    OVER_MIN_ORDER_AMOUNT_ERROR("[ERROR] 최소 주문 금액은 10,000원 입니다. 다시 입력해 주세요.")
-    ;
+    OVER_MIN_ORDER_AMOUNT_ERROR("[ERROR] 최소 주문 금액은 10,000원 입니다. 다시 입력해 주세요.");
 
 
     private String message;

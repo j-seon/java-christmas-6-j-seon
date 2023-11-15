@@ -50,9 +50,6 @@ public class OrderValidator {
             if (isBeverageOnlyOrder(order)) {
                 throw new IllegalArgumentException(BEVERAGE_ONLY_ORDER_ERROR.getMessage());
             }
-            if (isOverMinOrderAmount(order.getTotalAmount())) {
-                throw new IllegalArgumentException(OVER_MIN_ORDER_AMOUNT_ERROR.getMessage());
-            }
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -61,10 +58,6 @@ public class OrderValidator {
     }
     private boolean isOverMaxOrderLimit(int quantity) {
         return quantity > MAX_ORDER_QUANTITY.getNumber();
-    }
-
-    private boolean isOverMinOrderAmount(int amount) {
-        return amount < MIN_ORDER_AMOUNT.getNumber();
     }
 
     private boolean isBeverageOnlyOrder (Order order) {
