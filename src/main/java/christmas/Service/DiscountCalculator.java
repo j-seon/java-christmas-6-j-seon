@@ -5,15 +5,6 @@ import java.util.List;
 
 import static christmas.enums.OrderRelatedNumbers.THIS_YEAR_DECEMBER_FIRST_SUNDAY;
 
-/*
-  - [ ] 일~목 디저트 메뉴 1개당 2,023 할인
-  - [ ] 금~토 메인 메뉴 1개당 2,023 할인
-    - [ ] 날짜와 카테고리를 확인하여 해당 날짜 + 카테고리에 속한다면 할인 총 할인 금액 증가
-  - [ ] 날짜에 별이 있으면 1,000 할인
-    - [ ] 매주 일요일(3일, 3일 + 7의배수일)과 25일은 1,000원 추가 할인
-  - [ ] 할인 전 총 주문금액 12만원 이상, 샴페인 1개(25,000원) 증정
-
- */
 public class DiscountCalculator {
 
 	public void calculateDiscount(int date, Order order) {
@@ -23,7 +14,7 @@ public class DiscountCalculator {
 		int dDayDiscount = calculateDdayDiscount(date);
 		saveDiscountList(order, dDayDiscount, "크리스마스 디데이 할인");
 
-		int starDayDiscount = calculateStarDayDiscount(date, order);
+		int starDayDiscount = calculateStarDayDiscount(date);
 		saveDiscountList(order, starDayDiscount, "특별 할인");
 
 		String weekendStatus = calculateWeekendStatus(date);
@@ -33,24 +24,24 @@ public class DiscountCalculator {
 		// 12만원 이상 주문에 대한 보너스 샴페인
 		int bonusChampagne = calculateBonusChampagne(order);
 		if(bonusChampagne > 0) {
-			order.setGiftMenu("샴페인", 1);
+			order.addGiftMenu("샴페인", 1);
 			saveDiscountList(order, bonusChampagne, "증정 이벤트");
 		}
 	}
 
-	private int calculateDdayDiscount(int date) {
+	public int calculateDdayDiscount(int date) {
 		final int START_DDAY_EVENT_DAY = 1;
 		final int END_DDAY_EVENT_DAY = 25;
 		final int DEFAULT_DISCOUNT = 1000;
 		final int PLUS_DISCOUNT = 100;
 
 		if (date >= START_DDAY_EVENT_DAY && date <= END_DDAY_EVENT_DAY) {
-			int discount = DEFAULT_DISCOUNT + ((date - 1) * PLUS_DISCOUNT);
+			return DEFAULT_DISCOUNT + ((date - 1) * PLUS_DISCOUNT);
 		}
 		return 0;
 	}
 
-	private int calculateStarDayDiscount(int date, Order order) {
+	public int calculateStarDayDiscount(int date) {
 		// 일요일 및 25일 추가 할인
 		final int CHRISTMAS_DAY = 25;
 		if (isSunday(date) || date == CHRISTMAS_DAY) {
@@ -82,7 +73,7 @@ public class DiscountCalculator {
 		return totalDiscount;
 	}
 
-	private int calculateBonusChampagne(Order order) {
+	public int calculateBonusChampagne(Order order) {
 		if (order.getTotalAmount() >= 120000) {
 			return 25000;
 		}
@@ -92,7 +83,7 @@ public class DiscountCalculator {
 	private boolean isSunday(int date) {
 		return date % 7 == THIS_YEAR_DECEMBER_FIRST_SUNDAY.getNumber();
 	}
-	private String calculateWeekendStatus(int date) {
+	public String calculateWeekendStatus(int date) {
 		// 0: 일요일, 6: 토요일
 		int dayOfWeek = (date + THIS_YEAR_DECEMBER_FIRST_SUNDAY.getNumber() - 1) % 7;
 		boolean weekdayDiscount = dayOfWeek >= 0 && dayOfWeek <= 4;
@@ -106,7 +97,7 @@ public class DiscountCalculator {
 	private void saveDiscountList(Order order, int discount, String message) {
 		FormatService formatService = new FormatService();
 		if(discount > 0) {
-			order.setTotalDiscountAmount(discount);
+			order.addTotalDiscountAmount(discount);
 			order.addDiscountList(new String[]{message, formatService.addThousandSeparator(discount)});
 		}
 	}

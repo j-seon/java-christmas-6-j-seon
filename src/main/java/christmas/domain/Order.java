@@ -61,25 +61,8 @@ public class Order {
         return menuOrders.size();
     }
     public void addMenuOrder(MenuOrder menuOrder) {
-        setOrderAmountAndQuantity(menuOrder);
+        addOrderAmountAndQuantity(menuOrder);
         menuOrders.add(menuOrder);
-    }
-    public void addDiscountList (String[] discountInfo) {
-        discountList.add(discountInfo);
-    }
-
-    public void setGiftMenu(String name, int quantity) {
-        giftMenu.add(new String[]{name, "" + quantity});
-    }
-    public void setTotalDiscountAmount(int discountAmount) {
-        totalDiscountAmount += discountAmount;
-    }
-    private void setOrderAmountAndQuantity(MenuOrder menuOrder) {
-        int menuPrice = menuOrder.getMenu().getPrice();
-        int menuOrderQuantity = menuOrder.getQuantity();
-
-        totalAmount += (menuPrice * menuOrderQuantity);
-        totalOrderQuantity += menuOrder.getQuantity();
     }
     public int getOrderQuantity(String menuName) {
         return menuOrders.stream()
@@ -110,5 +93,26 @@ public class Order {
             orderCategory.add(menuOrder.getMenu().getCategory());
         }
         return orderCategory;
+    }
+
+
+    public void addDiscountList (String[] discountInfo) {
+        discountList.add(discountInfo);
+    }
+
+    public void addGiftMenu(String name, int quantity) {
+        giftMenu.add(new String[]{name, "" + quantity});
+    }
+    public void addTotalDiscountAmount(int discountAmount) {
+        totalDiscountAmount += discountAmount;
+    }
+
+
+    private void addOrderAmountAndQuantity(MenuOrder menuOrder) {
+        int menuPrice = menuOrder.getMenu().getPrice();
+        int menuOrderQuantity = menuOrder.getQuantity();
+
+        totalAmount += (menuPrice * menuOrderQuantity);
+        totalOrderQuantity += menuOrder.getQuantity();
     }
 }
